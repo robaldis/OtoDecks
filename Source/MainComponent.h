@@ -1,7 +1,7 @@
 /*
-  ==============================================================================
+   ==============================================================================
 
-    This file was auto-generated!
+   This file was auto-generated!
 
   ==============================================================================
 */
@@ -43,12 +43,29 @@ private:
 
     TextButton playButton{"PLAY"};
     TextButton stopButton{"STOP"};
+    TextButton loadButton{"LOAD"};
     Slider volSlider;
+    Slider speedSlider;
+    Slider playHead;
     
 
     Random rand;
     double phase;
     double dphase;
+
+    // Audio reading classes
+    // Allows to open many types of file formats with one class.
+    AudioFormatManager formatManager;
+    
+    std::unique_ptr<AudioFormatReaderSource> readerSource;
+
+    // What controls the song
+    AudioTransportSource transportSource;
+    // What controls the speed of the song
+    ResamplingAudioSource resampleSource{&transportSource,false,2};
+
+    void loadURL(File file);
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
