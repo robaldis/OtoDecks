@@ -25,6 +25,7 @@ public:
     ~MainComponent();
 
     //==============================================================================
+    // AudioAppComponent overrides
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
     void releaseResources() override;
@@ -45,6 +46,9 @@ private:
     Slider volSlider;
     
 
+    Random rand;
+    double phase;
+    double dphase;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
