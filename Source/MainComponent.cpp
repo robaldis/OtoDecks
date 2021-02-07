@@ -16,36 +16,22 @@ MainComponent::MainComponent()
     setSize (800, 600);
 
     // Some platforms require permissions to open input channels so request that here
-    if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
+    if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio) 
         && ! RuntimePermissions::isGranted (RuntimePermissions::recordAudio))
     {
-        RuntimePermissions::request (RuntimePermissions::recordAudio,
-                                     [&] (bool granted) { if (granted)  setAudioChannels (2, 2); });
-    }
+        RuntimePermissions::request (RuntimePermissions::recordAudio, [&] (bool granted) { if (granted)  setAudioChannels (2, 2); });
+
+    } 
     else
     {
         // Specify the number of input and output channels that we want to open
         setAudioChannels (0, 2);
     }
 
-    addAndMakeVisible(playButton);
-    addAndMakeVisible(stopButton);
-    addAndMakeVisible(loadButton);
-    addAndMakeVisible(volSlider);
-    addAndMakeVisible(speedSlider);
-    addAndMakeVisible(playHead);
 
-    playButton.addListener(this);
-    stopButton.addListener(this);
-    loadButton.addListener(this);
 
-    volSlider.addListener(this);
-    speedSlider.addListener(this);
-    playHead.addListener(this);
-    volSlider.setRange(0,1.0);
-    speedSlider.setRange(0,10.0, 0.01);
-    playHead.setRange(0,100.0, 0.01);
-    
+    addAndMakeVisible(deckGUI1);
+    addAndMakeVisible(deckGUI2);
 }
 
 MainComponent::~MainComponent()
@@ -58,11 +44,16 @@ MainComponent::~MainComponent()
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
     player1.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    player2.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    mixerSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
+
+    mixerSource.addInputSource(&player1, false);
+    mixerSource.addInputSource(&player2, false);
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    player1.getNextAudioBlock(bufferToFill);
+    mixerSource.getNextAudioBlock(bufferToFill);
 }
 
 void MainComponent::releaseResources()
@@ -72,6 +63,9 @@ void MainComponent::releaseResources()
 
     // For more details, see the help for AudioProcessor::releaseResources()
     player1.releaseResources();
+    player2.releaseResources();
+
+    mixerSource.releaseResources();
 }
 
 //==============================================================================
@@ -93,49 +87,13 @@ void MainComponent::resized()
     // If you add any child components, this is where you should
     // update their positions.
 
+    deckGUI1.setBounds(0,0,getWidth()/2, getHeight());
+    deckGUI2.setBounds(getWidth()/2,0,getWidth()/2, getHeight());
 
-    double rowH = getHeight()/6;
-
-    playButton.setBounds(0,0,getWidth(),rowH);
-    stopButton.setBounds(0,rowH,getWidth(),rowH);
-    loadButton.setBounds(0,rowH*5,getWidth(),rowH);
-    volSlider.setBounds(0,rowH*2,getWidth(), rowH);
-    speedSlider.setBounds(0,rowH*3,getWidth(), rowH);
-    playHead.setBounds(0,rowH*4,getWidth(), rowH);
 }
-
 void MainComponent::buttonClicked(Button* button) {
-    if(button == &playButton) {
-        std::cout << "Play button was clicked" << std::endl;
-        player1.start();
-    }
-    if(button == &stopButton) {
-        std::cout << "Stop button was clicked" << std::endl;
-        player1.stop();
-    }
-    if (button == &loadButton) {
-        FileChooser chooser{"Select file..."};
-        if (chooser.browseForFileToOpen()) {
-           player1.loadURL(chooser.getResult()); 
-        }
-    }
 }
 
 void MainComponent::sliderValueChanged(Slider* slider) {
-
-    if (slider == &volSlider) {
-        // std::cout << "slider moved " << slider->getValue() << std::endl;
-        player1.setGain(slider->getValue());
-    }
-    if(slider == &speedSlider) {
-        //TODO: Assertion error when slider goes to 0
-        player1.setSpeed(slider->getValue());
-    }
-    if (slider == &playHead) {
-        double newPos = (slider->getValue()/100) * player1.getLengthInSeconds();
-        player1.setPosition(newPos);
-
-    }
 }
-
 

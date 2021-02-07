@@ -28,6 +28,7 @@ class DJAudioPlayer : public AudioAppComponent {
         void setGain(double gain);
         void setSpeed(double speed);
         void setPosition(double posInSec);
+        void setPositionRelative(double pos);
         double getLengthInSeconds();
 
         void start();
