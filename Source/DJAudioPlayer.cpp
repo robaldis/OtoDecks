@@ -44,11 +44,23 @@ void DJAudioPlayer::loadURL(File file){
 }
 
 void DJAudioPlayer::setGain(double gain){
+    if (gain < 0 || gain > 1.0) {
+        std::cout << "[DJAudioPlayer::setGain] gain out of range" << std::endl;
+    }
+    transportSource.setGain(gain); 
 }
-void DJAudioPlayer::setSpeed(double speed){
+
+void DJAudioPlayer::setSpeed(double ratio){
+    if (ratio < 0 || ratio > 100.0) {
+        std::cout << "[DJAudioPlayer::setSpeed] speed out of range" << std::endl;
+    }
+    resampleSource.setResamplingRatio(ratio);
 }
 void DJAudioPlayer::setPosition(double posInSec){
+    transportSource.setPosition(posInSec);
+
 }
+
 double DJAudioPlayer::getLengthInSeconds(){
     return transportSource.getLengthInSeconds();
 }
