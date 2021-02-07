@@ -483,4 +483,4 @@ build/intermediate/Debug/Main_90ebc5c2.o: ../../Source/Main.cpp \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
  /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
- ../../Source/MainComponent.h
+ ../../Source/MainComponent.h ../../Source/DJAudioPlayer.h

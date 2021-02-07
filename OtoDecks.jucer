@@ -3,6 +3,9 @@
 <JUCERPROJECT id="RlPvYl" name="OtoDecks" projectType="guiapp" jucerVersion="5.4.7">
   <MAINGROUP id="ouKvEQ" name="OtoDecks">
     <GROUP id="{B005A698-BD25-089B-AC8A-BFE640312042}" name="Source">
+      <FILE id="rzIGw1" name="DJAudioPlayer.cpp" compile="1" resource="0"
+            file="Source/DJAudioPlayer.cpp"/>
+      <FILE id="tbsBuW" name="DJAudioPlayer.h" compile="0" resource="0" file="Source/DJAudioPlayer.h"/>
       <FILE id="bK9hPA" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="g2rLhO" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>

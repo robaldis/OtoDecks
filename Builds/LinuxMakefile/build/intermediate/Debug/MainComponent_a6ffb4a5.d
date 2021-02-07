@@ -483,4 +483,5 @@ build/intermediate/Debug/MainComponent_a6ffb4a5.o: \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLImage.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
- /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h
+ /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
+ ../../Source/DJAudioPlayer.h
