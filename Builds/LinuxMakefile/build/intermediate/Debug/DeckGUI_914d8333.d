@@ -483,4 +483,5 @@ build/intermediate/Debug/DeckGUI_914d8333.o: ../../Source/DeckGUI.cpp \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
  /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
- ../../Source/DeckGUI.h ../../Source/DJAudioPlayer.h
+ ../../Source/DeckGUI.h ../../Source/DJAudioPlayer.h \
+ ../../Source/WaveformDisplay.h

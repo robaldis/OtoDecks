@@ -46,13 +46,17 @@ private:
 
     Random rand;
 
+    AudioFormatManager formatManager;
+    AudioThumbnailCache thumbCache{100};
+
     DJAudioPlayer player1;
     DJAudioPlayer player2;
 
-    DeckGUI deckGUI1{&player1};
-    DeckGUI deckGUI2{&player2};
+    DeckGUI deckGUI1{&player1, formatManager, thumbCache};
+    DeckGUI deckGUI2{&player2, formatManager, thumbCache};
 
     MixerAudioSource mixerSource;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

@@ -3,6 +3,10 @@
 <JUCERPROJECT id="RlPvYl" name="OtoDecks" projectType="guiapp" jucerVersion="5.4.7">
   <MAINGROUP id="ouKvEQ" name="OtoDecks">
     <GROUP id="{B005A698-BD25-089B-AC8A-BFE640312042}" name="Source">
+      <FILE id="GWWYxg" name="WaveformDisplay.cpp" compile="1" resource="0"
+            file="Source/WaveformDisplay.cpp"/>
+      <FILE id="uTiOQ5" name="WaveformDisplay.h" compile="0" resource="0"
+            file="Source/WaveformDisplay.h"/>
       <FILE id="zEJQ1o" name="DeckGUI.cpp" compile="1" resource="0" file="Source/DeckGUI.cpp"/>
       <FILE id="gbpQxw" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
       <FILE id="rzIGw1" name="DJAudioPlayer.cpp" compile="1" resource="0"
