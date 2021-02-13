@@ -14,7 +14,7 @@
 
 class DJAudioPlayer : public AudioAppComponent {
     public:
-        DJAudioPlayer();
+        DJAudioPlayer(AudioFormatManager& _formatManager);
         ~DJAudioPlayer();
 
         //==============================================================================
@@ -38,7 +38,7 @@ class DJAudioPlayer : public AudioAppComponent {
 
         // Audio reading classes
         // Allows to open many types of file formats with one class.
-        AudioFormatManager formatManager;
+        AudioFormatManager& formatManager;
 
         std::unique_ptr<AudioFormatReaderSource> readerSource;
 

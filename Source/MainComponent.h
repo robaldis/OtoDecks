@@ -49,8 +49,8 @@ private:
     AudioFormatManager formatManager;
     AudioThumbnailCache thumbCache{100};
 
-    DJAudioPlayer player1;
-    DJAudioPlayer player2;
+    DJAudioPlayer player1{formatManager};
+    DJAudioPlayer player2{formatManager};
 
     DeckGUI deckGUI1{&player1, formatManager, thumbCache};
     DeckGUI deckGUI2{&player2, formatManager, thumbCache};
