@@ -13,7 +13,8 @@
 
 //==============================================================================
 WaveformDisplay::WaveformDisplay(AudioFormatManager & formatManagerToUse, 
-        AudioThumbnailCache & cacheToUse) : audioThump(1000, formatManagerToUse, cacheToUse), fileLoaded(false)
+        AudioThumbnailCache & cacheToUse) 
+    : audioThump(1000, formatManagerToUse, cacheToUse), fileLoaded(false), position(0)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -48,6 +49,8 @@ void WaveformDisplay::paint (Graphics& g)
                 audioThump.getTotalLength(), 
                 0,
                 1.0f);
+        g.setColour(Colours::red);
+        g.drawRect(position*getWidth(), 0, getWidth() / 50, getHeight());
 
 
     } else {
@@ -80,5 +83,12 @@ void WaveformDisplay::loadURL(URL audioURL) {
         std::cout << "[WaveformDisplay::loadURL] loaded" << std::endl;
     } else {
         std::cout << "[WaveformDisplay::loadURL] not loaded" << std::endl;
+    }
+}
+
+void WaveformDisplay::setPositionRelative(double pos) {
+    if (pos != position) {
+        position = pos;      
+        repaint();
     }
 }

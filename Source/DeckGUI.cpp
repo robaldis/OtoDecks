@@ -42,10 +42,13 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
     volSlider.setRange(0.0,1.0);
     speedSlider.setRange(0.0,100.0);
     playHead.setRange(0.0,1.0);
+
+    startTimer(50);
 }
 
 DeckGUI::~DeckGUI()
 {
+    stopTimer();
 }
 
 void DeckGUI::paint (Graphics& g)
@@ -82,6 +85,8 @@ void DeckGUI::resized()
     playHead.setBounds(0,rowH*4,getWidth(), rowH);
     waveformDisplay.setBounds(0,rowH*5,getWidth(), rowH*2);
     loadButton.setBounds(0,rowH*7,getWidth(),rowH);
+
+
 
 }
 
@@ -129,4 +134,8 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y){
 
     }
 
+}
+
+void DeckGUI::timerCallback() {
+    waveformDisplay.setPositionRelative(player->getPositionRelative());
 }

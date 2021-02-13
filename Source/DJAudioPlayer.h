@@ -31,6 +31,9 @@ class DJAudioPlayer : public AudioAppComponent {
         void setPositionRelative(double pos);
         double getLengthInSeconds();
 
+        //** Get the relative to play head */
+        double getPositionRelative();
+
         void start();
         void stop();
 

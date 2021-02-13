@@ -70,6 +70,10 @@ void DJAudioPlayer::setPositionRelative(double pos) {
     }
 }
 
+double DJAudioPlayer::getPositionRelative() {
+    return transportSource.getCurrentPosition() / transportSource.getLengthInSeconds();
+}
+
 
 void DJAudioPlayer::start(){
     transportSource.start();

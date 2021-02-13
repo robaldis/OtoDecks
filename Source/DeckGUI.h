@@ -20,7 +20,8 @@
 class DeckGUI    : public Component,
                    public Button::Listener,
                    public Slider::Listener,
-                   public FileDragAndDropTarget
+                   public FileDragAndDropTarget,
+                   public Timer
 {
 public:
     DeckGUI(DJAudioPlayer* _player, 
@@ -28,14 +29,17 @@ public:
             AudioThumbnailCache & cacheToUse);
     ~DeckGUI();
     
-    void buttonClicked(Button*);
-    void sliderValueChanged(Slider*);
+    void buttonClicked(Button*) override;
+    void sliderValueChanged(Slider*) override;
 
     bool isInterestedInFileDrag (const StringArray &files);
     void filesDropped (const StringArray &files, int x, int y);
 
     void paint (Graphics&) override;
     void resized() override;
+
+    void timerCallback() override;
+
 
 private:
 
