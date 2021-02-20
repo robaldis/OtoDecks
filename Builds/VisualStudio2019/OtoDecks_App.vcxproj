@@ -138,6 +138,7 @@
     <Lib/>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\PlaylistComponent.cpp"/>
     <ClCompile Include="..\..\Source\WaveformDisplay.cpp"/>
     <ClCompile Include="..\..\Source\DeckGUI.cpp"/>
     <ClCompile Include="..\..\Source\DJAudioPlayer.cpp"/>
@@ -1577,6 +1578,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_opengl.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\PlaylistComponent.h"/>
     <ClInclude Include="..\..\Source\WaveformDisplay.h"/>
     <ClInclude Include="..\..\Source\DeckGUI.h"/>
     <ClInclude Include="..\..\Source\DJAudioPlayer.h"/>
