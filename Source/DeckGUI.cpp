@@ -40,7 +40,9 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
     playHead.addListener(this);
 
     volSlider.setRange(0.0,1.0);
-    speedSlider.setRange(0.0,100.0);
+    volSlider.setValue(1.0);
+    speedSlider.setRange(0.1,5.0);
+    speedSlider.setValue(1);
     playHead.setRange(0.0,1.0);
 
     startTimer(50);
