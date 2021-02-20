@@ -50,6 +50,7 @@ void WaveformDisplay::paint (Graphics& g)
                 0,
                 1.0f);
         g.setColour(Colours::red);
+        // play head position
         g.drawRect(position*getWidth(), 0, getWidth() / 50, getHeight());
 
 
@@ -71,8 +72,7 @@ void WaveformDisplay::resized()
 
 void WaveformDisplay::changeListenerCallback(ChangeBroadcaster *source) {
     repaint();
-    std::cout << "[WaveformDisplay::changeListenerCallback]" << std::endl;
-
+    // std::cout << "[WaveformDisplay::changeListenerCallback]" << std::endl;
 }
 
 

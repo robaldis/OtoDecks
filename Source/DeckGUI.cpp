@@ -139,5 +139,10 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y){
 }
 
 void DeckGUI::timerCallback() {
-    waveformDisplay.setPositionRelative(player->getPositionRelative());
+    double pos = player->getPositionRelative();
+    if (pos > 0) {
+        waveformDisplay.setPositionRelative(pos);
+        // set the slider position
+        playHead.setValue(pos*playHead.getMaximum());
+    }
 }
