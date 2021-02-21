@@ -44,6 +44,8 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
     speedSlider.setRange(0.1,5.0);
     speedSlider.setValue(1);
     playHead.setRange(0.0,1.0);
+    // remove the text box for play head slider
+    playHead.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
 
     startTimer(50);
 }
