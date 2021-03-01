@@ -61,6 +61,10 @@
 			isa = PBXBuildFile;
 			fileRef = 6D9E9B49E2E0EB62F9AD557A;
 		};
+		DD4B60A07490862F1D2A6D53 = {
+			isa = PBXBuildFile;
+			fileRef = AA1CD76FDF773D7E38AE4B76;
+		};
 		A011466017BA95EB055E8831 = {
 			isa = PBXBuildFile;
 			fileRef = DB97B3E230C0D32BCE5E9C0A;
@@ -143,6 +147,13 @@
 			name = "juce_audio_formats";
 			path = "/usr/share/juce/modules/juce_audio_formats";
 			sourceTree = "<absolute>";
+		};
+		02C0732C9A90E1F5CABCDC33 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = MiddleDeck.h;
+			path = ../../Source/MiddleDeck.h;
+			sourceTree = "SOURCE_ROOT";
 		};
 		0DBF1D176AB40560433A1514 = {
 			isa = PBXFileReference;
@@ -403,6 +414,13 @@
 			path = "/usr/share/juce/modules/juce_data_structures";
 			sourceTree = "<absolute>";
 		};
+		AA1CD76FDF773D7E38AE4B76 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = MiddleDeck.cpp;
+			path = ../../Source/MiddleDeck.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		AC670C7272C5ADCE90198D80 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -518,6 +536,8 @@
 		3E3AAB72B6213311A563030A = {
 			isa = PBXGroup;
 			children = (
+				AA1CD76FDF773D7E38AE4B76,
+				02C0732C9A90E1F5CABCDC33,
 				DB97B3E230C0D32BCE5E9C0A,
 				6B4C770ABC274D0E5C69832E,
 				980ECE9452B460FF0EC5F734,
@@ -850,6 +870,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD4B60A07490862F1D2A6D53,
 				A011466017BA95EB055E8831,
 				0F24A9221184FBD8680CB299,
 				2D91A9FF020E07F24D731738,

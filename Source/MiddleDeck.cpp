@@ -1,0 +1,83 @@
+/*
+  ==============================================================================
+
+    MiddleDeck.cpp
+    Created: 1 Mar 2021 3:28:44pm
+    Author:  robert
+
+  ==============================================================================
+*/
+
+#include <JuceHeader.h>
+#include "MiddleDeck.h"
+
+//==============================================================================
+MiddleDeck::MiddleDeck()
+{
+    // In your constructor, you should add any child components, and
+    // initialise any special settings that your component needs.
+
+    addAndMakeVisible(mixer);
+    addAndMakeVisible(vol1);
+    addAndMakeVisible(vol2);
+    addAndMakeVisible(repeat1);
+    addAndMakeVisible(repeat2);
+    
+    repeat1.setImage(true, true, true, 
+ 
+    mixer.addListener(this);
+    vol1.addListener(this);
+    vol2.addListener(this);
+
+
+    mixer.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
+    vol1.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
+    vol2.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
+
+    vol1.setSliderStyle(Slider::LinearVertical);
+    vol2.setSliderStyle(Slider::LinearVertical);
+}
+
+MiddleDeck::~MiddleDeck()
+{
+}
+
+void MiddleDeck::paint (Graphics& g)
+{
+    /* This demo code just fills the component's background and
+       draws some placeholder text to get you started.
+
+       You should replace everything in this method with your own
+       drawing code..
+    */
+
+    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
+
+    g.setColour (Colours::grey);
+    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
+
+    g.setColour (Colours::white);
+    g.setFont (14.0f);
+    //g.drawText ("MiddleDeck", getLocalBounds(),
+    //            Justification::centred, true);   // draw some placeholder text
+}
+
+void MiddleDeck::resized()
+{
+    // This method is where you should set the bounds of any child
+    // components that your component contains..
+
+
+    int halfWidth = getWidth()/2;
+    int smallHeight = getHeight()/5;
+
+    mixer.setBounds(0, smallHeight*4, getWidth(), smallHeight);
+    vol1.setBounds(0, smallHeight, halfWidth, smallHeight*3);
+    vol2.setBounds(halfWidth, smallHeight, halfWidth, smallHeight * 3);
+    repeat1.setBounds(halfWidth, 0, halfWidth, smallHeight);
+    repeat2.setBounds(halfWidth, 0, halfWidth, smallHeight);
+}
+
+void MiddleDeck::sliderValueChanged(Slider *slider) {
+
+}

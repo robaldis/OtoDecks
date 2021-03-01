@@ -33,6 +33,7 @@ MainComponent::MainComponent()
     addAndMakeVisible(deckGUI1);
     addAndMakeVisible(deckGUI2);
     addAndMakeVisible(playlistComponent);
+    addAndMakeVisible(midDeck);
 
     formatManager.registerBasicFormats();
 }
@@ -90,8 +91,11 @@ void MainComponent::resized()
     // If you add any child components, this is where you should
     // update their positions.
 
-    deckGUI1.setBounds(0,0,getWidth()/2, getHeight()/2);
-    deckGUI2.setBounds(getWidth()/2,0,getWidth()/2, getHeight()/2);
+    int unit = getWidth()/5;
+
+    deckGUI1.setBounds(0,0,unit * 2, getHeight()/2);
+    deckGUI2.setBounds(unit * 3,0,unit * 2, getHeight()/2);
+    midDeck.setBounds(unit * 2, 0, unit, getHeight()/2); 
 
     playlistComponent.setBounds(0,getHeight()/2, getWidth(), getHeight()/2);
 }

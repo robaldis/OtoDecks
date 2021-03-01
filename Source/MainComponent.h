@@ -12,6 +12,8 @@
 #include "DJAudioPlayer.h"
 #include "DeckGUI.h"
 #include "PlaylistComponent.h"
+#include "MiddleDeck.h"
+
 
 //==============================================================================
 /*
@@ -55,6 +57,7 @@ private:
 
     DeckGUI deckGUI1{&player1, formatManager, thumbCache};
     DeckGUI deckGUI2{&player2, formatManager, thumbCache};
+    MiddleDeck midDeck{};
 
     MixerAudioSource mixerSource;
 
