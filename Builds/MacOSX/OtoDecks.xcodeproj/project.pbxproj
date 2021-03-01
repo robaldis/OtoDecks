@@ -151,6 +151,13 @@
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		1086497A17DF7FF9E7F1F964 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = "juce_audio_utils";
+			path = "../../JuceLibraryCode/modules/juce_audio_utils";
+			sourceTree = "SOURCE_ROOT";
+		};
 		130F963EC73E84ABC26626B2 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -459,13 +466,6 @@
 			path = ../../Source/WaveformDisplay.h;
 			sourceTree = "SOURCE_ROOT";
 		};
-		DA5DFDD9021A0AFC2DC80675 = {
-			isa = PBXFileReference;
-			lastKnownFileType = file;
-			name = "juce_audio_utils";
-			path = "/usr/share/juce/modules/juce_audio_utils";
-			sourceTree = "<absolute>";
-		};
 		DB97B3E230C0D32BCE5E9C0A = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -548,7 +548,7 @@
 				45CB7BAAF70C78F2D45B4D82,
 				021DFC4222772F1848036968,
 				4506E9A4C469689C8C481B1C,
-				DA5DFDD9021A0AFC2DC80675,
+				1086497A17DF7FF9E7F1F964,
 				E337CE2DDB586ADF73B4B5A7,
 				130F963EC73E84ABC26626B2,
 				A66AADF9D64818FA9F396C17,
@@ -663,6 +663,7 @@
 				HEADER_SEARCH_PATHS = (
 					"../../JuceLibraryCode",
 					"/usr/share/juce/modules",
+					"../../JuceLibraryCode/modules",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Info-App.plist;
@@ -707,6 +708,7 @@
 				HEADER_SEARCH_PATHS = (
 					"../../JuceLibraryCode",
 					"/usr/share/juce/modules",
+					"../../JuceLibraryCode/modules",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Info-App.plist;
