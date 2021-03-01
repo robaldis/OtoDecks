@@ -485,4 +485,4 @@ build/intermediate/Debug/Main_90ebc5c2.o: ../../Source/Main.cpp \
  /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
  ../../Source/MainComponent.h ../../Source/DJAudioPlayer.h \
  ../../Source/DeckGUI.h ../../Source/WaveformDisplay.h \
- ../../Source/PlaylistComponent.h
+ ../../Source/PlaylistComponent.h ../../Source/MiddleDeck.h
