@@ -16,7 +16,8 @@
 /*
 */
 class MiddleDeck    : public Component,
-                      public Slider::Listener
+                      public Slider::Listener,
+                      public Button::Listener
 {
 public:
     MiddleDeck();
@@ -26,6 +27,7 @@ public:
     void resized() override;
 
     void sliderValueChanged(Slider *slider) override;
+    void buttonClicked(Button *button) override;
 
 
 private:

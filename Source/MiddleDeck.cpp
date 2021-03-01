@@ -38,6 +38,8 @@ MiddleDeck::MiddleDeck()
     mixer.addListener(this);
     vol1.addListener(this);
     vol2.addListener(this);
+    repeat1.addListener(this);
+    repeat2.addListener(this);
 
 
     mixer.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
@@ -90,5 +92,23 @@ void MiddleDeck::resized()
 }
 
 void MiddleDeck::sliderValueChanged(Slider *slider) {
+    if (slider == &mixer) {
+        std::cout << "mixer is being pressed" << std::endl;
+    }else if (slider == &vol1) {
+        std::cout << "vol1 is being pressed" << std::endl;
+    }else if (slider == &vol2) {
+        std::cout << "vol2 is being pressed" << std::endl;
+    }
+
+}
+
+void MiddleDeck::buttonClicked(Button *button) {
+    if (button == &repeat1) {
+        std::cout << "r1 is being pressed" << std::endl;
+
+    } else if (button == &repeat2) {
+        std::cout << "r2 is being pressed" << std::endl;
+
+    }
 
 }
