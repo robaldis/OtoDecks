@@ -484,4 +484,4 @@ build/intermediate/Debug/PlaylistComponent_76bc332c.o: \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
  /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
- ../../Source/PlaylistComponent.h
+ ../../JuceLibraryCode/BinaryData.h ../../Source/PlaylistComponent.h

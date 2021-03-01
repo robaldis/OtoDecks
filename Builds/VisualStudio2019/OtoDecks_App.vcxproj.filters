@@ -5,6 +5,12 @@
     <Filter Include="OtoDecks\Source">
       <UniqueIdentifier>{35A3AE94-1AB3-89C0-566C-A97F5D4E91F7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OtoDecks\assets\icons">
+      <UniqueIdentifier>{F834BDE1-08EF-7919-4AD3-4BB4759CA4D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OtoDecks\assets">
+      <UniqueIdentifier>{AED8A54E-AC67-3410-46E8-F1B55BDC8990}</UniqueIdentifier>
+    </Filter>
     <Filter Include="OtoDecks">
       <UniqueIdentifier>{D33314E5-33D4-00F6-14D2-6CD15CDC429F}</UniqueIdentifier>
     </Filter>
@@ -1921,6 +1927,9 @@
     <ClCompile Include="C:\JUCE\modules\juce_opengl\juce_opengl.mm">
       <Filter>JUCE Modules\juce_opengl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
@@ -3708,11 +3717,17 @@
     <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h">
       <Filter>JUCE Library Code</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h">
+      <Filter>JUCE Library Code</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
       <Filter>JUCE Library Code</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\assets\icons\repeat-button.png">
+      <Filter>OtoDecks\assets\icons</Filter>
+    </None>
     <None Include="C:\JUCE\modules\juce_audio_processors\format_types\VST3_SDK\base\LICENSE.txt">
       <Filter>JUCE Modules\juce_audio_processors\format_types\VST3_SDK\base</Filter>
     </None>

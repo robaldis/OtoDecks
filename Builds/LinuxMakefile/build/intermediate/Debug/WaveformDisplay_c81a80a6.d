@@ -484,4 +484,4 @@ build/intermediate/Debug/WaveformDisplay_c81a80a6.o: \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
  /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
- ../../Source/WaveformDisplay.h
+ ../../JuceLibraryCode/BinaryData.h ../../Source/WaveformDisplay.h

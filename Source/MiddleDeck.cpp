@@ -17,13 +17,23 @@ MiddleDeck::MiddleDeck()
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
+    Image repeatImage = ImageCache::getFromMemory(BinaryData::repeatbutton_png, BinaryData::repeatbutton_pngSize);
+
+
     addAndMakeVisible(mixer);
     addAndMakeVisible(vol1);
     addAndMakeVisible(vol2);
     addAndMakeVisible(repeat1);
     addAndMakeVisible(repeat2);
     
-    repeat1.setImage(true, true, true, 
+    repeat1.setImages(true, true, true, 
+            repeatImage, 0, Colour(0,0,0), 
+            repeatImage, 0, Colour(255,0,0), 
+            repeatImage, 0, Colour(100,0,0));
+    repeat2.setImages(true, true, true, 
+            repeatImage, 0, Colour(0,0,0), 
+            repeatImage, 0, Colour(255,0,0), 
+            repeatImage, 0, Colour(100,0,0));
  
     mixer.addListener(this);
     vol1.addListener(this);
@@ -70,12 +80,13 @@ void MiddleDeck::resized()
 
     int halfWidth = getWidth()/2;
     int smallHeight = getHeight()/5;
+    int buttonPadding = getWidth()/10;
 
     mixer.setBounds(0, smallHeight*4, getWidth(), smallHeight);
     vol1.setBounds(0, smallHeight, halfWidth, smallHeight*3);
     vol2.setBounds(halfWidth, smallHeight, halfWidth, smallHeight * 3);
-    repeat1.setBounds(halfWidth, 0, halfWidth, smallHeight);
-    repeat2.setBounds(halfWidth, 0, halfWidth, smallHeight);
+    repeat1.setBounds(0 + (buttonPadding/2), 0+ (buttonPadding/2), halfWidth- buttonPadding, smallHeight- buttonPadding);
+    repeat2.setBounds(halfWidth + (buttonPadding/2), 0+ (buttonPadding/2), halfWidth- buttonPadding, smallHeight- buttonPadding);
 }
 
 void MiddleDeck::sliderValueChanged(Slider *slider) {

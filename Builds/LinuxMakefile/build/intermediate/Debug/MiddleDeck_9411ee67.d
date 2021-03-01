@@ -484,4 +484,4 @@ build/intermediate/Debug/MiddleDeck_9411ee67.o: \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
  /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
- ../../Source/MiddleDeck.h
+ ../../JuceLibraryCode/BinaryData.h ../../Source/MiddleDeck.h

@@ -23,6 +23,12 @@
             file="Source/MainComponent.cpp"/>
       <FILE id="Pnbrb9" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
+    <GROUP id="{CDB6B9F7-E639-E400-6A7E-89C4584345F2}" name="assets">
+      <GROUP id="{63867883-CA82-B550-1B03-200BBE5D6663}" name="icons">
+        <FILE id="ck6YDb" name="repeat-button.png" compile="0" resource="1"
+              file="assets/icons/repeat-button.png"/>
+      </GROUP>
+    </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">

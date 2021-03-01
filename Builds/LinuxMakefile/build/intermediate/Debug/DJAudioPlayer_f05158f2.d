@@ -483,4 +483,5 @@ build/intermediate/Debug/DJAudioPlayer_f05158f2.o: \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLImage.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLShaderProgram.h \
  /usr/share/juce/modules/juce_opengl/opengl/juce_OpenGLTexture.h \
- /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h
+ /usr/share/juce/modules/juce_opengl/utils/juce_OpenGLAppComponent.h \
+ ../../JuceLibraryCode/BinaryData.h

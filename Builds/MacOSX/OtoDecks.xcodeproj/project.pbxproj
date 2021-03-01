@@ -89,6 +89,10 @@
 			isa = PBXBuildFile;
 			fileRef = 38C6995E38DA467AFBEAA1D7;
 		};
+		7667F3F6DC429B8B080BA43A = {
+			isa = PBXBuildFile;
+			fileRef = C744ACB904206D5C7EBF70A6;
+		};
 		A9D6B89F6C8BB870049E7F54 = {
 			isa = PBXBuildFile;
 			fileRef = 7D1256CBA90D5828ACFCDF3F;
@@ -204,6 +208,13 @@
 			path = System/Library/Frameworks/DiscRecording.framework;
 			sourceTree = SDKROOT;
 		};
+		20DC7923F349CFA1F397D1BF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BinaryData.h;
+			path = ../../JuceLibraryCode/BinaryData.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		22C9E72D36B03768BA8229E5 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -230,6 +241,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = Main.cpp;
 			path = ../../Source/Main.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		43C6823986D585784824DEFA = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "repeat-button.png";
+			path = "../../assets/icons/repeat-button.png";
 			sourceTree = "SOURCE_ROOT";
 		};
 		44B8846DFA561A128E3B8D7C = {
@@ -456,6 +474,13 @@
 			path = "../../JuceLibraryCode/include_juce_audio_processors.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		C744ACB904206D5C7EBF70A6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BinaryData.cpp;
+			path = ../../JuceLibraryCode/BinaryData.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		C92EF7DDC32F373BDAD0155F = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -553,10 +578,27 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		EAD658170AF0C749FBE20CBE = {
+			isa = PBXGroup;
+			children = (
+				43C6823986D585784824DEFA,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
+		8D3F2DE51922D0DBDFE0580B = {
+			isa = PBXGroup;
+			children = (
+				EAD658170AF0C749FBE20CBE,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
 		245BDAE5E0A44458DFCDA95D = {
 			isa = PBXGroup;
 			children = (
 				3E3AAB72B6213311A563030A,
+				8D3F2DE51922D0DBDFE0580B,
 			);
 			name = OtoDecks;
 			sourceTree = "<group>";
@@ -585,6 +627,8 @@
 			isa = PBXGroup;
 			children = (
 				8267471116E0B625B09802E3,
+				C744ACB904206D5C7EBF70A6,
+				20DC7923F349CFA1F397D1BF,
 				7D1256CBA90D5828ACFCDF3F,
 				7DFAAC21A46B6BFD7A994F31,
 				6198D5C083F1BA049226FB80,
@@ -877,6 +921,7 @@
 				3B48D5460576A52E6B4D3D37,
 				031CE2EA68026836DB5E0C9C,
 				D45B09E5538D4382AC66ADE8,
+				7667F3F6DC429B8B080BA43A,
 				A9D6B89F6C8BB870049E7F54,
 				B5FE402CA9AD54A6B12FD27C,
 				580DC7C70E0337F66A0BF737,

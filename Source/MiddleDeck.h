@@ -30,12 +30,15 @@ public:
 
 private:
 
+
+
+
     Slider mixer;
     Slider vol1;
     Slider vol2;
 
-    Image normalImage{Image::ARGB, 64,64 true};
 
+    
     ImageButton repeat1{"repeat1"};
     ImageButton repeat2{"repeat2"};
 
