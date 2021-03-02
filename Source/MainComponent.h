@@ -57,7 +57,7 @@ private:
 
     DeckGUI deckGUI1{&player1, formatManager, thumbCache};
     DeckGUI deckGUI2{&player2, formatManager, thumbCache};
-    MiddleDeck midDeck{};
+    MiddleDeck midDeck{&player1, &player2};
 
     MixerAudioSource mixerSource;
 

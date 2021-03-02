@@ -12,7 +12,9 @@
 #include "MiddleDeck.h"
 
 //==============================================================================
-MiddleDeck::MiddleDeck()
+MiddleDeck::MiddleDeck(DJAudioPlayer *_player1, DJAudioPlayer *_player2): 
+    player1(_player1), 
+    player2(_player2)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -41,6 +43,12 @@ MiddleDeck::MiddleDeck()
     repeat1.addListener(this);
     repeat2.addListener(this);
 
+    vol1.setRange(0.0,1.0);
+    vol1.setValue(1.0);
+    vol2.setRange(0.0,1.0);
+    vol2.setValue(1.0);
+    mixer.setRange(0.0,1.0);
+    mixer.setValue(0.5);
 
     mixer.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
     vol1.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0,0);
@@ -93,20 +101,23 @@ void MiddleDeck::resized()
 
 void MiddleDeck::sliderValueChanged(Slider *slider) {
     if (slider == &mixer) {
-        std::cout << "mixer is being pressed" << std::endl;
+        player1->setMixRatio(1-slider->getValue());
+        player2->setMixRatio(slider->getValue());
     }else if (slider == &vol1) {
-        std::cout << "vol1 is being pressed" << std::endl;
+        player1->setGain(slider->getValue());
     }else if (slider == &vol2) {
-        std::cout << "vol2 is being pressed" << std::endl;
+        player2->setGain(slider->getValue());
     }
 
 }
 
 void MiddleDeck::buttonClicked(Button *button) {
     if (button == &repeat1) {
+        player1->toggleLooping();
         std::cout << "r1 is being pressed" << std::endl;
 
     } else if (button == &repeat2) {
+        player2->toggleLooping();
         std::cout << "r2 is being pressed" << std::endl;
 
     }
