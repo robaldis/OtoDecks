@@ -104,8 +104,7 @@ void DeckGUI::buttonClicked(Button* button) {
     if (button == &loadButton) {
         FileChooser chooser{"Select file..."};
         if (chooser.browseForFileToOpen()) {
-           player->loadURL(chooser.getResult()); 
-           waveformDisplay.loadURL(URL{chooser.getResult()});
+            loadSong(chooser.getResult());
         }
     }
 }
@@ -131,8 +130,7 @@ bool DeckGUI::isInterestedInFileDrag (const StringArray &files) {
 void DeckGUI::filesDropped (const StringArray &files, int x, int y){
     std::cout << "[filesDropped] file dropped" << std::endl;
     if (files.size() == 1) {
-        player->loadURL(File{files[0]});
-
+        loadSong(File{files[0]});
     }
 
 }
@@ -149,4 +147,10 @@ void DeckGUI::timerCallback() {
         player->setPosition(0);
         player->start();
     }
+}
+
+void DeckGUI::loadSong(File file) {
+    player->loadURL(file); 
+    waveformDisplay.loadURL(URL{file});
+
 }

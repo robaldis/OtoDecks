@@ -25,6 +25,7 @@ class DJAudioPlayer : public AudioAppComponent {
 
         //==============================================================================
         void loadURL(File file);
+        void loadFromPlaylist(File file);
         void setGain(double gain);
         void setMixRatio(double ratio);
         void setSpeed(double speed);

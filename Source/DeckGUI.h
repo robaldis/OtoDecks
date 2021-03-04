@@ -32,13 +32,16 @@ public:
     void buttonClicked(Button*) override;
     void sliderValueChanged(Slider*) override;
 
-    bool isInterestedInFileDrag (const StringArray &files);
-    void filesDropped (const StringArray &files, int x, int y);
+    bool isInterestedInFileDrag (const StringArray &files) override;
+    void filesDropped (const StringArray &files, int x, int y) override;
 
     void paint (Graphics&) override;
     void resized() override;
 
     void timerCallback() override;
+    /** Load ups a song from a path, runs everything needed to visually display
+     * the song as well as actually hearing in*/
+    void loadSong(File file);
 
 
 private:

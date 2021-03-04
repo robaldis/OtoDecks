@@ -13,16 +13,19 @@
 #include <JuceHeader.h>
 #include <vector>
 #include <string>
+#include "SongInfo.h"
+#include "DeckGUI.h"
 
 //==============================================================================
 /*
 */
 class PlaylistComponent    : public Component,
                              public TableListBoxModel,
-                             public Button::Listener
+                             public Button::Listener,
+                             public FileDragAndDropTarget
 {
 public:
-    PlaylistComponent();
+    PlaylistComponent(DeckGUI &player1, DeckGUI &player2);
     ~PlaylistComponent();
 
     void paint (Graphics&) override;
@@ -37,9 +40,15 @@ public:
     // -- Button::Listener overrides --
     void buttonClicked (Button* button) override;
 
+    bool isInterestedInFileDrag (const StringArray &files) override;
+    void filesDropped (const StringArray &files, int x, int y) override;
+
 private:
+    DeckGUI &player1;
+    DeckGUI &player2;
 
     TableListBox tableComponent;
+    std::vector<SongInfo> songs;
     std::vector<std::string> songTitle;
 
 

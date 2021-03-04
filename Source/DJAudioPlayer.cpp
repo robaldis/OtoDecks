@@ -42,7 +42,9 @@ void DJAudioPlayer::loadURL(File file){
 
 }
 
+
 void DJAudioPlayer::setGain(double _gain){
+    
     if (_gain < 0 || _gain > 1.0) {
         std::cout << "[DJAudioPlayer::setGain] gain out of range" << std::endl;
     } else {

@@ -12,7 +12,9 @@
 #include "PlaylistComponent.h"
 
 //==============================================================================
-PlaylistComponent::PlaylistComponent()
+PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2): 
+    player1(player1),
+    player2(player2)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -23,6 +25,7 @@ PlaylistComponent::PlaylistComponent()
     songTitle.push_back("bitch im a cow");
     songTitle.push_back("song song 2");
     songTitle.push_back("Avicii 2");
+
 
     tableComponent.getHeader().addColumn("Song Title", 1, 400);
     tableComponent.getHeader().addColumn("", 2, 200);
@@ -67,7 +70,7 @@ void PlaylistComponent::resized()
 
 
 int PlaylistComponent::getNumRows()  {
-    return songTitle.size();
+    return songs.size();
 }
 void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int width, int height, bool rowIsSelected) {
     if (rowIsSelected) {
@@ -79,7 +82,7 @@ void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int wid
 
 }
 void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
-    g.drawText(songTitle[rowNumber], 2, 0, width - 4, height, Justification::centredLeft, true);
+    g.drawText(songs[rowNumber].name, 2, 0, width - 4, height, Justification::centredLeft, true);
 }
 
 
@@ -100,7 +103,26 @@ Component* PlaylistComponent::refreshComponentForCell (int rowNumber, int column
 
 void PlaylistComponent::buttonClicked (Button* button) {
     int id = std::stoi(button->getComponentID().toStdString());
-    std::cout << "[PlaylistComponent::buttonClicked] button pressed: " << songTitle[id] << std::endl;
-
+    std::cout << "[PlaylistComponent::buttonClicked] button pressed: " << songs[id].name << std::endl;
+    // take the path, send to player to play
+    player1.loadSong(songs[id].path);
 }
 
+
+
+bool PlaylistComponent::isInterestedInFileDrag (const StringArray &files) {
+    return true;
+}
+
+void PlaylistComponent::filesDropped (const StringArray &files, int x, int y) {
+    std::cout << "[PlaylistComponent::filesDropped] file dropped" << std::endl;
+    if (files.size() == 1) {
+        // TODO: get song name from file name
+        std::string path = files[0].toStdString();
+        std::string name = SongInfo::getNameFromFile(path);
+        SongInfo song{name, File{path}};
+        songs.push_back(song);
+    }
+    // Update the list to be rerendered
+    tableComponent.updateContent();
+}
