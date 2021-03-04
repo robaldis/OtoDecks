@@ -9,6 +9,8 @@
 */
 
 #include <JuceHeader.h>
+#include <fstream>
+#include <iostream>
 #include "PlaylistComponent.h"
 
 //==============================================================================
@@ -19,6 +21,8 @@ PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2):
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
+    loadFromFile();
+
     songTitle.push_back("Song 1");
     songTitle.push_back("Song 2");
     songTitle.push_back("Song 3");
@@ -28,11 +32,15 @@ PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2):
 
 
     tableComponent.getHeader().addColumn("Song Title", 1, 400);
-    tableComponent.getHeader().addColumn("", 2, 200);
+    tableComponent.getHeader().addColumn("left Deck", 2, 50);
+    tableComponent.getHeader().addColumn("right Deck", 3, 50);
+    tableComponent.getHeader().addColumn("Remove", 4, 50);
     tableComponent.setModel(this);
 
 
     addAndMakeVisible(tableComponent);
+    addAndMakeVisible(load);
+    load.addListener(this);
 }
 
 PlaylistComponent::~PlaylistComponent()
@@ -64,7 +72,11 @@ void PlaylistComponent::resized()
     // This method is where you should set the bounds of any child
     // components that your component contains..
 
-    tableComponent.setBounds(0,0,getWidth(),getHeight());
+    int buttonHeader = getHeight()/10;
+
+    
+    tableComponent.setBounds(0,buttonHeader,getWidth(),getHeight() - buttonHeader);
+    load.setBounds(0, 0, getWidth(), buttonHeader);
 
 }
 
@@ -90,22 +102,69 @@ void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, in
 Component* PlaylistComponent::refreshComponentForCell (int rowNumber, int columnId, bool isRowSelected, Component * existingComponentToUpdate) {
     if (columnId == 2) {
         if (existingComponentToUpdate == nullptr) {
-            TextButton* btn = new TextButton{"play"};
+            TextButton* btn = new TextButton{"<"};
 
-            String id{std::to_string(rowNumber)};
+            String id{std::to_string(rowNumber) + ",l"};
             btn->setComponentID(id);
             btn->addListener(this);
             existingComponentToUpdate = btn;
         }
+    } else if (columnId == 3) {
+        if (existingComponentToUpdate == nullptr) {
+            TextButton* btn = new TextButton{">"};
+            std::string name = std::to_string(rowNumber) + ",r";
+            std::cout << name << std::endl;
+
+            String id{name};
+            btn->setComponentID(id);
+            btn->addListener(this);
+            existingComponentToUpdate = btn;
+        }
+    } else if (columnId == 4) {
+        if (existingComponentToUpdate == nullptr) {
+            TextButton* btn = new TextButton{"-"};
+            std::string name = std::to_string(rowNumber) + ",-";
+            std::cout << name << std::endl;
+
+            String id{name};
+            btn->setComponentID(id);
+            btn->addListener(this);
+            existingComponentToUpdate = btn;
+        }
+
     }
+
     return existingComponentToUpdate;
 }
 
+
 void PlaylistComponent::buttonClicked (Button* button) {
-    int id = std::stoi(button->getComponentID().toStdString());
-    std::cout << "[PlaylistComponent::buttonClicked] button pressed: " << songs[id].name << std::endl;
-    // take the path, send to player to play
-    player1.loadSong(songs[id].path);
+    if (button == &load) {
+        std::cout << "load a file" << std::endl;
+        FileChooser chooser{"Select file..."};
+        if (chooser.browseForFileToOpen()) {
+            addToSongs(chooser.getResult().getFullPathName().toStdString());
+        }
+
+    } else {
+        std::string name = button->getComponentID().toStdString();
+		unsigned int end = name.find_first_of(',', 0);
+        int id = std::stoi(name.substr(0,end));
+        std::string channel = name.substr(end + 1,2);
+        // take the path, send to player to play
+        if (channel == "r") {
+            // play the song on the right deck
+            player2.loadSong(songs[id].path);
+        } else if (channel == "l") {
+            // play the song on the left deck
+            player1.loadSong(songs[id].path);
+        } else if (channel == "-") {
+            // remove the song
+            songs.erase(songs.begin() + id);
+            tableComponent.updateContent();
+            saveToFile();
+        }
+    }
 }
 
 
@@ -118,11 +177,40 @@ void PlaylistComponent::filesDropped (const StringArray &files, int x, int y) {
     std::cout << "[PlaylistComponent::filesDropped] file dropped" << std::endl;
     if (files.size() == 1) {
         // TODO: get song name from file name
-        std::string path = files[0].toStdString();
-        std::string name = SongInfo::getNameFromFile(path);
-        SongInfo song{name, File{path}};
-        songs.push_back(song);
+        addToSongs(files[0].toStdString());
     }
-    // Update the list to be rerendered
+}
+
+
+void PlaylistComponent::addToSongs(std::string path) {
+    std::string name = SongInfo::getNameFromFile(path);
+    SongInfo song{name, File{path}};
+    songs.push_back(song);
+    saveToFile();
+    // Update the list when the vector is updated
     tableComponent.updateContent();
+}
+void PlaylistComponent::saveToFile() {
+    std::ofstream out("playlistSongs.csv");
+    for (SongInfo& song : songs) {
+        out << song.path.getFullPathName();
+    }
+    out.close();
+}
+
+void PlaylistComponent::loadFromFile() {
+
+    std::ifstream csvFile{"playlistSongs.csv"};
+    std::string line;
+
+    if (csvFile.is_open()) {
+        while(std::getline(csvFile, line)) {
+            try {
+                SongInfo song{SongInfo::getNameFromFile(line),File{line}}; 
+                songs.push_back(song);
+            } catch(const std::exception& e) {
+                std::cout << "PlaylistComponent::loadFromFile bad data" << std::endl;
+            }
+        }
+    }
 }

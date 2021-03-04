@@ -18,6 +18,8 @@ class SongInfo {
         std::string name;
         File path;
         int ID;
+        /** returns the Name of the file given the path */
         static std::string getNameFromFile(std::string path);
-        static std::vector<std::string> tokeniser(std::string, char);
+        /** tokenises a string with a char seperator*/
+        static std::vector<std::string> tokenise(std::string, char);
 };

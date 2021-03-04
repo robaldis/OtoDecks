@@ -20,15 +20,16 @@ SongInfo::SongInfo(std::string _name, File _path) : name(_name),
 std::string SongInfo::getNameFromFile(std::string path) {
 
     std::vector<std::string> splitPath;
-    splitPath = tokeniser(path, '/');
-    return splitPath[splitPath.size() - 1].substr(0, 4);
+    splitPath = tokenise(path, '/');
+    std::string file = splitPath[splitPath.size() - 1];
+    unsigned int end = file.find_first_of('.', 0);
+    return file.substr(0, end);
 
-    return "";
 }
 
 
 
-std::vector<std::string> SongInfo::tokeniser(std::string input, char separator) {
+std::vector<std::string> SongInfo::tokenise(std::string input, char separator) {
     std::string token;
 	std::vector<std::string> tokens;
 
@@ -55,3 +56,5 @@ std::vector<std::string> SongInfo::tokeniser(std::string input, char separator) 
 
 	return tokens;
 }
+
+

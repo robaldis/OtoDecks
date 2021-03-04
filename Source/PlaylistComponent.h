@@ -31,21 +31,38 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-    // -- TableListBoxModel overrides --
+    /** returns the vector that the TableListBox is supposed to be rendering,
+     * this is how many rows there will be on the TableListBox*/
     int getNumRows() override;
+    /** Renders the background of a row of the table */
     void paintRowBackground (Graphics &, int rowNumber, int width, int height, bool rowIsSelected) override;
+    /** Renders the cell */
     void paintCell (Graphics &, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     Component* refreshComponentForCell	(int rowNumber, int	columnId, bool isRowSelected, Component * existingComponentToUpdate) override;	
     
     // -- Button::Listener overrides --
+    /** calls every time a button is pressed */
     void buttonClicked (Button* button) override;
 
+
+    /** FileDragAndDrop override, triggers when a file hovers over this component */
     bool isInterestedInFileDrag (const StringArray &files) override;
+    /** FileDragAndDrop override, triggers when a file is drop into the component */
     void filesDropped (const StringArray &files, int x, int y) override;
+
+    /** Adds an entry of Song to the songs vector */
+    void addToSongs(std::string);
+
+    /** save the songs vector to csv file */
+    void saveToFile();
+    /** Load songs from csv file */
+    void loadFromFile();
 
 private:
     DeckGUI &player1;
     DeckGUI &player2;
+
+    TextButton load{"Load"};
 
     TableListBox tableComponent;
     std::vector<SongInfo> songs;
