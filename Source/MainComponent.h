@@ -50,6 +50,7 @@ private:
     AudioFormatManager formatManager;
     AudioThumbnailCache thumbCache{100};
 
+
     DJAudioPlayer player1{formatManager};
     DJAudioPlayer player2{formatManager};
 
