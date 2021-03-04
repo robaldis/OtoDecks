@@ -14,7 +14,7 @@
 
 class SongInfo {
     public:
-        SongInfo(std::string _name, File _path);
+        SongInfo(std::string _name, File _path, int _id);
         std::string name;
         File path;
         int ID;

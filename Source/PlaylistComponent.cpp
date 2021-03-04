@@ -1,11 +1,11 @@
 /*
-  ==============================================================================
+   ==============================================================================
 
-    PlaylistComponent.cpp
-    Created: 20 Feb 2021 4:59:16pm
-    Author:  robert
+   PlaylistComponent.cpp
+Created: 20 Feb 2021 4:59:16pm
+Author:  robert
 
-  ==============================================================================
+==============================================================================
 */
 
 #include <JuceHeader.h>
@@ -16,7 +16,8 @@
 //==============================================================================
 PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2): 
     player1(player1),
-    player2(player2)
+    player2(player2),
+    searching(false)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
@@ -40,7 +41,9 @@ PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2):
 
     addAndMakeVisible(tableComponent);
     addAndMakeVisible(load);
+    addAndMakeVisible(search);
     load.addListener(this);
+    search.addListener(this);
 }
 
 PlaylistComponent::~PlaylistComponent()
@@ -54,7 +57,7 @@ void PlaylistComponent::paint (Graphics& g)
 
        You should replace everything in this method with your own
        drawing code..
-    */
+       */
 
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
 
@@ -64,7 +67,7 @@ void PlaylistComponent::paint (Graphics& g)
     g.setColour (Colours::white);
     g.setFont (14.0f);
     g.drawText ("PlaylistComponent", getLocalBounds(),
-                Justification::centred, true);   // draw some placeholder text
+            Justification::centred, true);   // draw some placeholder text
 }
 
 void PlaylistComponent::resized()
@@ -74,31 +77,30 @@ void PlaylistComponent::resized()
 
     int buttonHeader = getHeight()/10;
 
-    
+
     tableComponent.setBounds(0,buttonHeader,getWidth(),getHeight() - buttonHeader);
-    load.setBounds(0, 0, getWidth(), buttonHeader);
+    load.setBounds(getWidth()/2, 0, getWidth()/2, buttonHeader);
+    search.setBounds(0, 0, getWidth()/2, buttonHeader);
 
 }
 
 
 int PlaylistComponent::getNumRows()  {
-    return songs.size();
+    return songsFilter.size();
 }
+
 void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int width, int height, bool rowIsSelected) {
     if (rowIsSelected) {
         g.fillAll(Colours::orange);
     } else {
         g.fillAll(Colours::darkgrey);
     }
-
-
 }
+
 void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
-    g.drawText(songs[rowNumber].name, 2, 0, width - 4, height, Justification::centredLeft, true);
+    g.drawText(songsFilter[rowNumber].name, 2, 0, width - 4, height, Justification::centredLeft, true);
 }
 
-
-/** allows you to put custome components int a cell */
 Component* PlaylistComponent::refreshComponentForCell (int rowNumber, int columnId, bool isRowSelected, Component * existingComponentToUpdate) {
     if (columnId == 2) {
         if (existingComponentToUpdate == nullptr) {
@@ -131,9 +133,7 @@ Component* PlaylistComponent::refreshComponentForCell (int rowNumber, int column
             btn->addListener(this);
             existingComponentToUpdate = btn;
         }
-
     }
-
     return existingComponentToUpdate;
 }
 
@@ -148,26 +148,34 @@ void PlaylistComponent::buttonClicked (Button* button) {
 
     } else {
         std::string name = button->getComponentID().toStdString();
-		unsigned int end = name.find_first_of(',', 0);
+        unsigned int end = name.find_first_of(',', 0);
         int id = std::stoi(name.substr(0,end));
         std::string channel = name.substr(end + 1,2);
+        std::cout << "id: " << id  << " channel: " << channel << std::endl;
         // take the path, send to player to play
         if (channel == "r") {
             // play the song on the right deck
-            player2.loadSong(songs[id].path);
+            player2.loadSong(songsFilter[id].path);
         } else if (channel == "l") {
             // play the song on the left deck
-            player1.loadSong(songs[id].path);
+            player1.loadSong(songsFilter[id].path);
         } else if (channel == "-") {
             // remove the song
-            songs.erase(songs.begin() + id);
-            tableComponent.updateContent();
-            saveToFile();
+            removeFromSongs(songsFilter[id].ID);
         }
     }
 }
 
-
+void PlaylistComponent::textEditorTextChanged(TextEditor& editor) {
+    if (editor.getText() == "") {
+        searching = false;
+        filterSongs();
+    } else {
+        searching = true;
+        searchQuery = editor.getText().toStdString();
+        filterSongs();
+    } 
+}
 
 bool PlaylistComponent::isInterestedInFileDrag (const StringArray &files) {
     return true;
@@ -184,19 +192,55 @@ void PlaylistComponent::filesDropped (const StringArray &files, int x, int y) {
 
 void PlaylistComponent::addToSongs(std::string path) {
     std::string name = SongInfo::getNameFromFile(path);
-    SongInfo song{name, File{path}};
+    int id = songs.size();
+    SongInfo song{name, File{path}, id};
     songs.push_back(song);
     saveToFile();
+    filterSongs();
     // Update the list when the vector is updated
     tableComponent.updateContent();
 }
+
+void PlaylistComponent::removeFromSongs(int id) {
+    for (SongInfo song : songs) {
+        if (song.ID == id) {
+            songs.erase(songs.begin() + id);
+            filterSongs();
+        }
+    }
+    saveToFile();
+}
+
+void PlaylistComponent::filterSongs() {
+    std::cout << searching << std::endl;
+    songsFilter.clear();
+    if (searching) {
+        std::cout << "yest" << std::endl;
+        for (SongInfo song : songs) {
+            if (song.name.substr(0, searchQuery.size()) == searchQuery) {
+                songsFilter.push_back(song);
+            }
+        }
+    } else {
+        songsFilter = songs;
+    }
+
+    tableComponent.updateContent();
+    tableComponent.repaint();
+    for (SongInfo song : songsFilter) {
+        std::cout << song.name << std::endl;
+    }
+}
+
 void PlaylistComponent::saveToFile() {
     std::ofstream out("playlistSongs.csv");
     for (SongInfo& song : songs) {
         out << song.path.getFullPathName();
+        out << "\n";
     }
     out.close();
 }
+
 
 void PlaylistComponent::loadFromFile() {
 
@@ -206,8 +250,7 @@ void PlaylistComponent::loadFromFile() {
     if (csvFile.is_open()) {
         while(std::getline(csvFile, line)) {
             try {
-                SongInfo song{SongInfo::getNameFromFile(line),File{line}}; 
-                songs.push_back(song);
+                addToSongs(line);
             } catch(const std::exception& e) {
                 std::cout << "PlaylistComponent::loadFromFile bad data" << std::endl;
             }

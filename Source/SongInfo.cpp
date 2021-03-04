@@ -10,8 +10,8 @@
 
 #include "SongInfo.h"
 
-SongInfo::SongInfo(std::string _name, File _path) : name(_name), 
-    path(_path)
+SongInfo::SongInfo(std::string _name, File _path, int _id) : name(_name), 
+    path(_path), ID(_id)
 {
 
 }

@@ -22,6 +22,7 @@
 class PlaylistComponent    : public Component,
                              public TableListBoxModel,
                              public Button::Listener,
+                             public TextEditor::Listener,
                              public FileDragAndDropTarget
 {
 public:
@@ -44,6 +45,8 @@ public:
     /** calls every time a button is pressed */
     void buttonClicked (Button* button) override;
 
+    void textEditorTextChanged(TextEditor& editor) override;
+
 
     /** FileDragAndDrop override, triggers when a file hovers over this component */
     bool isInterestedInFileDrag (const StringArray &files) override;
@@ -52,20 +55,30 @@ public:
 
     /** Adds an entry of Song to the songs vector */
     void addToSongs(std::string);
+    /** remove from the songs array */
+    void removeFromSongs(int id);
 
+
+private:
     /** save the songs vector to csv file */
     void saveToFile();
     /** Load songs from csv file */
     void loadFromFile();
+    void filterSongs();
 
-private:
     DeckGUI &player1;
     DeckGUI &player2;
 
+
+    bool searching;
+    std::string searchQuery;
+
+    TextEditor search;
     TextButton load{"Load"};
 
     TableListBox tableComponent;
     std::vector<SongInfo> songs;
+    std::vector<SongInfo> songsFilter;
     std::vector<std::string> songTitle;
 
 
