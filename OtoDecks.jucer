@@ -3,6 +3,8 @@
 <JUCERPROJECT id="RlPvYl" name="OtoDecks" projectType="guiapp" jucerVersion="5.4.7">
   <MAINGROUP id="ouKvEQ" name="OtoDecks">
     <GROUP id="{B005A698-BD25-089B-AC8A-BFE640312042}" name="Source">
+      <FILE id="d75JMN" name="MiddleDeck.cpp" compile="1" resource="0" file="Source/MiddleDeck.cpp"/>
+      <FILE id="fpqiCB" name="MiddleDeck.h" compile="0" resource="0" file="Source/MiddleDeck.h"/>
       <FILE id="KuyQVl" name="PlaylistComponent.cpp" compile="1" resource="0"
             file="Source/PlaylistComponent.cpp"/>
       <FILE id="oPFM39" name="PlaylistComponent.h" compile="0" resource="0"
@@ -20,6 +22,12 @@
       <FILE id="g2rLhO" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="Pnbrb9" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+    <GROUP id="{CDB6B9F7-E639-E400-6A7E-89C4584345F2}" name="assets">
+      <GROUP id="{63867883-CA82-B550-1B03-200BBE5D6663}" name="icons">
+        <FILE id="ck6YDb" name="repeat-button.png" compile="0" resource="1"
+              file="assets/icons/repeat-button.png"/>
+      </GROUP>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

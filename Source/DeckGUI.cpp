@@ -25,7 +25,7 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player,
     addAndMakeVisible(playButton);
     addAndMakeVisible(stopButton);
     addAndMakeVisible(loadButton);
-    addAndMakeVisible(volSlider);
+    // addAndMakeVisible(volSlider);
     addAndMakeVisible(speedSlider);
     addAndMakeVisible(playHead);
 
@@ -89,9 +89,6 @@ void DeckGUI::resized()
     playHead.setBounds(0,rowH*4,getWidth(), rowH);
     waveformDisplay.setBounds(0,rowH*5,getWidth(), rowH*2);
     loadButton.setBounds(0,rowH*7,getWidth(),rowH);
-
-
-
 }
 
 
@@ -146,5 +143,10 @@ void DeckGUI::timerCallback() {
         waveformDisplay.setPositionRelative(pos);
         // set the slider position
         playHead.setValue(pos*playHead.getMaximum());
+    }
+    if (pos == 1 && player->isLooping()) {
+        std::cout << "timeCallback looping" << std::endl;
+        player->setPosition(0);
+        player->start();
     }
 }

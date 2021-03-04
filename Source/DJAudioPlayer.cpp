@@ -11,7 +11,7 @@
 #include "DJAudioPlayer.h"
 
 DJAudioPlayer::DJAudioPlayer (AudioFormatManager& _formatManager)
-    : formatManager(_formatManager){}
+    : formatManager(_formatManager), looping(false){}
 DJAudioPlayer::~DJAudioPlayer(){}
 
 void DJAudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate) {
@@ -42,12 +42,19 @@ void DJAudioPlayer::loadURL(File file){
 
 }
 
-void DJAudioPlayer::setGain(double gain){
-    if (gain < 0 || gain > 1.0) {
+void DJAudioPlayer::setGain(double _gain){
+    if (_gain < 0 || _gain > 1.0) {
         std::cout << "[DJAudioPlayer::setGain] gain out of range" << std::endl;
     } else {
-        transportSource.setGain(gain); 
+        gain = _gain;
+        transportSource.setGain(gain * mixRatio); 
     }
+}
+
+
+void DJAudioPlayer::setMixRatio(double ratio) {
+    mixRatio = ratio;
+    setGain(gain);
 }
 
 void DJAudioPlayer::setSpeed(double ratio){
@@ -59,6 +66,18 @@ void DJAudioPlayer::setSpeed(double ratio){
 }
 void DJAudioPlayer::setPosition(double posInSec){
     transportSource.setPosition(posInSec);
+}
+void DJAudioPlayer::toggleLooping() {
+    if (looping) {
+        looping = false;
+    } else {
+        looping = true;
+    }
+
+}
+bool DJAudioPlayer::isLooping() {
+    return looping;
+
 }
 
 void DJAudioPlayer::setPositionRelative(double pos) {

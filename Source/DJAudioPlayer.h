@@ -26,7 +26,10 @@ class DJAudioPlayer : public AudioAppComponent {
         //==============================================================================
         void loadURL(File file);
         void setGain(double gain);
+        void setMixRatio(double ratio);
         void setSpeed(double speed);
+        void toggleLooping();
+        bool isLooping();
         void setPosition(double posInSec);
         void setPositionRelative(double pos);
         double getLengthInSeconds();
@@ -49,4 +52,8 @@ class DJAudioPlayer : public AudioAppComponent {
         AudioTransportSource transportSource;
         // What controls the speed of the song
         ResamplingAudioSource resampleSource{&transportSource,false,2};
+
+        double mixRatio;
+        double gain;
+        bool looping;
 };

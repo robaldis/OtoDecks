@@ -2,3 +2,5 @@ JuceLibraryCode/
 .clangd/
 compile_commands.json
 Builds/
+Builds_old/
+
