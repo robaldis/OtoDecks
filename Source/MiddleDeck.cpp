@@ -19,7 +19,7 @@ MiddleDeck::MiddleDeck(DJAudioPlayer *_player1, DJAudioPlayer *_player2):
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
-    Image repeatImage = ImageCache::getFromMemory(BinaryData::repeatbutton_png, BinaryData::repeatbutton_pngSize);
+    repeatImage = ImageCache::getFromMemory(BinaryData::repeatbutton_png, BinaryData::repeatbutton_pngSize);
 
 
     addAndMakeVisible(mixer);
@@ -114,12 +114,41 @@ void MiddleDeck::sliderValueChanged(Slider *slider) {
 void MiddleDeck::buttonClicked(Button *button) {
     if (button == &repeat1) {
         player1->toggleLooping();
+        if (r1) {
+            repeat1.setImages(true, true, true, 
+                    repeatImage, 0, Colour(0,0,0), 
+                    repeatImage, 0, Colour(255,0,0), 
+                    repeatImage, 0, Colour(100,0,0));
+            r1 = false;
+
+        } else {
+            repeat1.setImages(true, true, true, 
+                    repeatImage, 0, Colour(255,0,0), 
+                    repeatImage, 0, Colour(255,0,0), 
+                    repeatImage, 0, Colour(100,0,0));
+            r1 = true;
+        }
         std::cout << "r1 is being pressed" << std::endl;
 
     } else if (button == &repeat2) {
         player2->toggleLooping();
+        if (r2) {
+            r2 = false;
+            repeat2.setImages(true, true, true, 
+                    repeatImage, 0, Colour(0,0,0), 
+                    repeatImage, 0, Colour(255,0,0), 
+                    repeatImage, 0, Colour(100,0,0));
+
+        } else {
+            r2 = true;
+            repeat2.setImages(true, true, true, 
+                    repeatImage, 0, Colour(255,0,0), 
+                    repeatImage, 0, Colour(255,0,0), 
+                    repeatImage, 0, Colour(100,0,0));
+        }
         std::cout << "r2 is being pressed" << std::endl;
 
     }
+    resized();
 
 }

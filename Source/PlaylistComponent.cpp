@@ -38,6 +38,8 @@ PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2):
     tableComponent.getHeader().addColumn("Remove", 4, 50);
     tableComponent.setModel(this);
 
+    formatManager.registerBasicFormats();
+
 
     addAndMakeVisible(tableComponent);
     addAndMakeVisible(load);
@@ -186,6 +188,16 @@ void PlaylistComponent::filesDropped (const StringArray &files, int x, int y) {
     if (files.size() == 1) {
         // TODO: get song name from file name
         addToSongs(files[0].toStdString());
+        AudioFormatReader* reader = formatManager.createReaderFor(files[0]);
+        if (reader) {
+            std::cout << reader->getFormatName() << std::endl;
+            std::cout << reader->metadataValues.size() << std::endl;
+            for (String key : reader->metadataValues.getAllKeys()) {
+                std::cout << "key: " << key << " value: " << reader->metadataValues.getValue(key, "unknown") << std::endl;
+                std::cout << "this is doing it" << std::endl;
+                // DBG ("Key: " + key + " value: " + reader->metadataValues.getValue (key, "unknown"));
+            }
+        }
     }
 }
 
@@ -215,7 +227,6 @@ void PlaylistComponent::filterSongs() {
     std::cout << searching << std::endl;
     songsFilter.clear();
     if (searching) {
-        std::cout << "yest" << std::endl;
         for (SongInfo song : songs) {
             if (song.name.substr(0, searchQuery.size()) == searchQuery) {
                 songsFilter.push_back(song);

@@ -69,6 +69,7 @@ private:
     DeckGUI &player1;
     DeckGUI &player2;
 
+    AudioFormatManager formatManager;
 
     bool searching;
     std::string searchQuery;

@@ -38,8 +38,11 @@ private:
     Slider vol1;
     Slider vol2;
     
+    Image repeatImage;
     ImageButton repeat1{"repeat1"};
+    bool r1;
     ImageButton repeat2{"repeat2"};
+    bool r2;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MiddleDeck)
 };
