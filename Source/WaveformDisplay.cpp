@@ -37,10 +37,12 @@ void WaveformDisplay::paint (Graphics& g)
     */
 
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
+    g.fillAll(Colours::lightgrey);
 
     g.setColour (Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-    g.setColour (Colours::orange);
+    
+    g.drawRect(getLocalBounds(), 2);   // draw an outline around the component
+    g.setColour (Colours::turquoise);
 
     if (fileLoaded) {
         audioThump.drawChannel(g,

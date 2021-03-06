@@ -32,7 +32,7 @@ PlaylistComponent::PlaylistComponent(DeckGUI &player1, DeckGUI &player2):
     songTitle.push_back("Avicii 2");
 
 
-    tableComponent.getHeader().addColumn("Song Title", 1, 400);
+    tableComponent.getHeader().addColumn("Song Title", 1, 650);
     tableComponent.getHeader().addColumn("left Deck", 2, 50);
     tableComponent.getHeader().addColumn("right Deck", 3, 50);
     tableComponent.getHeader().addColumn("Remove", 4, 50);
@@ -81,8 +81,8 @@ void PlaylistComponent::resized()
 
 
     tableComponent.setBounds(0,buttonHeader,getWidth(),getHeight() - buttonHeader);
-    load.setBounds(getWidth()/2, 0, getWidth()/2, buttonHeader);
-    search.setBounds(0, 0, getWidth()/2, buttonHeader);
+    load.setBounds((getWidth()/5)*4, 0, getWidth()/5 , buttonHeader);
+    search.setBounds(0, 0, (getWidth()/5)*4, buttonHeader);
 
 }
 

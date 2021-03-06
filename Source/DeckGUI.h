@@ -15,6 +15,17 @@
 #include "WaveformDisplay.h"
 
 //==============================================================================
+
+
+class OtherLookAndFeel : public LookAndFeel_V4
+{
+    public: 
+        OtherLookAndFeel();
+         void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
+                 const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider&) override;
+};
+
+
 /*
 */
 class DeckGUI    : public Component,
@@ -45,6 +56,7 @@ public:
 
 
 private:
+    OtherLookAndFeel otherLookAndFeel;
 
     TextButton playButton{"PLAY"};
     TextButton stopButton{"STOP"};

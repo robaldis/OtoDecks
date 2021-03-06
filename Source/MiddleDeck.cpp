@@ -72,6 +72,7 @@ void MiddleDeck::paint (Graphics& g)
     */
 
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));   // clear the background
+    g.fillAll(Colours::lightgrey);
 
     g.setColour (Colours::grey);
     g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
@@ -120,7 +121,6 @@ void MiddleDeck::buttonClicked(Button *button) {
                     repeatImage, 0, Colour(255,0,0), 
                     repeatImage, 0, Colour(100,0,0));
             r1 = false;
-
         } else {
             repeat1.setImages(true, true, true, 
                     repeatImage, 0, Colour(255,0,0), 
