@@ -24,21 +24,32 @@ class DJAudioPlayer : public AudioAppComponent {
         void releaseResources() override;
 
         //==============================================================================
+        /** Loads song from file into transport source */
         void loadURL(File file);
-        void loadFromPlaylist(File file);
+        /** Sets the gain of the song */
         void setGain(double gain);
+        /** Sets the mix ratio */
         void setMixRatio(double ratio);
+        /** sets the speed of the song*/
         void setSpeed(double speed);
+        /** Toggles if the song should loop */
         void toggleLooping();
+        /** Check if the song is looping */
         bool isLooping();
+        /** Sets the position of what part of the song we are in 
+         * This is position in seconds */
         void setPosition(double posInSec);
+        /** Sets the position based on a percentage full, 0-1 */
         void setPositionRelative(double pos);
+        /** Get the length of the song in seconds */
         double getLengthInSeconds();
 
         //** Get the relative to play head */
         double getPositionRelative();
 
+        /** Starts the song */
         void start();
+        /** Stops the song */
         void stop();
 
     private:

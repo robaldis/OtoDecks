@@ -45,6 +45,7 @@ public:
     /** calls every time a button is pressed */
     void buttonClicked (Button* button) override;
 
+    /** Called when the text is changed in the textEditor*/
     void textEditorTextChanged(TextEditor& editor) override;
 
 

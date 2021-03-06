@@ -3,9 +3,10 @@
 <JUCERPROJECT id="RlPvYl" name="OtoDecks" projectType="guiapp" jucerVersion="5.4.7">
   <MAINGROUP id="ouKvEQ" name="OtoDecks">
     <GROUP id="{B005A698-BD25-089B-AC8A-BFE640312042}" name="Source">
-      <FILE id="dT777m" name="ColourScheme.cpp" compile="1" resource="0"
-            file="Source/ColourScheme.cpp"/>
-      <FILE id="G3rKc0" name="ColourScheme.h" compile="0" resource="0" file="Source/ColourScheme.h"/>
+      <FILE id="dwi1y6" name="HeadLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/HeadLookAndFeel.cpp"/>
+      <FILE id="E6aCm1" name="HeadLookAndFeel.h" compile="0" resource="0"
+            file="Source/HeadLookAndFeel.h"/>
       <FILE id="igFUQL" name="SongInfo.cpp" compile="1" resource="0" file="Source/SongInfo.cpp"/>
       <FILE id="LILyu6" name="SongInfo.h" compile="0" resource="0" file="Source/SongInfo.h"/>
       <FILE id="d75JMN" name="MiddleDeck.cpp" compile="1" resource="0" file="Source/MiddleDeck.cpp"/>

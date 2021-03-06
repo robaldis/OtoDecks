@@ -25,8 +25,9 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
-    void changeListenerCallback(ChangeBroadcaster *source);
+    void changeListenerCallback(ChangeBroadcaster *source) override;
 
+    /** Load a song to generate the waveform from it */
     void loadURL(URL audioURL);
     /** set the relative position of the playhead */
     void setPositionRelative(double pos);

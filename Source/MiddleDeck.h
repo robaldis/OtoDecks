@@ -27,7 +27,9 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
+    /** Called when slider value changes */
     void sliderValueChanged(Slider *slider) override;
+    /** Called when a button is clicked */
     void buttonClicked(Button *button) override;
 
 private:
